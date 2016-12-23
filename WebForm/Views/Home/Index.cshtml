@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Sach newProduct = new Sach();
+    if(ViewBag.newProduct != null)
+    {
+        newProduct = (Sach)ViewBag.newProduct;
+    }
+}
+
+@model IEnumerable<Core.BIZ.Sach>
+@using Core.BIZ
+<div class="row">
+        <!-- Slider -->
+        <div class="col-lg-9 col-md-12">
+            <div class="slider">
+                <div class="bx-wrapper" style="max-width: 100%; margin: 0 auto;">
+                    <div class="bx-viewport" style="max-width: 100%; overflow: hidden; position: relative; max-height: 370px;">
+                        <ul class="bxslider">
+                            <li>
+                                <a href="detail.html"><img src="http://www.fahasa.com/media/magentothem/banner7/Ba-chua-hon.jpg" height="370"></a>
+                            </li>
+                            <li>
+                                <a href="detail.html"><img src="http://www.fahasa.com/media/magentothem/banner7/Ba-chua-hon.jpg" height="370"></a>
+                            </li>
+                            <li>
+                                <a href="detail.html"><img src="http://www.fahasa.com/media/magentothem/banner7/Ba-chua-hon.jpg" height="370"></a>
+                            </li>
+                        </ul>
+                    </div> <!-- bx-viewport -->
+                    <div class="bx-controls bx-has-controls-direction">
+                        <!-- <div class="bx-controls-direction">
+                            <a class="bx-prev">prev</a>
+                            <a class="bx-next">next</a>
+                        </div> -->
+                    </div>
+                </div> <!-- bx-wrapper -->
+            </div>
+        </div> <!-- col-lg-9 col-md-12 -->
+        <!-- End Slider -->
+        
+        <!-- Product Selection, visible only on large screen -->
+        <div class="col-lg-3 visible-lg">
+            <div class="row text-center">
+                <div class="col-lg-12 col-md-12">
+                    @if (newProduct != null)
+                    {
+                        <div class="thumbnail">
+                            <a href="@Url.Action("Details","Product",new { id = newProduct.MaSoSach }) " style="overflow: hidden; ">
+                                @if (newProduct.HinhAnh == null)
+                                {
+                                    <img src="http://www.fahasa.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/k/h/khu-vuon-bi-mat_1.jpg" width="250" height="210">
+                                }
+                                else
+                                {
+                                    <img src="@ImagesHelper.ImageToDataBase64String(newProduct.HinhAnhTypeImage)" width="240" height="210">
+                                }
+                                
+                            </a>
+                            <div class="prod-caption">
+                                <h4>
+                                    <a href="@Url.Action("Details","Product",new { id = newProduct.MaSoSach }) ">
+                                        @newProduct.TenSach
+                                    </a>
+                                </h4>
+                                <p>
+                                    @newProduct.MoTa
+                                </p>
+                                <p></p>
+
+                                <div class="btn-group btn-group-justified">
+                                    <a href="@Url.Action("Details","Product",new { id = newProduct.MaSoSach }) " class="btn btn-default">@DataDisplayHelper.displayMoney(newProduct.GiaBan)</a>
+                                    <a href="@Url.Action("AddToCart","Order",new { id = newProduct.MaSoSach })" class="btn btn-primary add-cart">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                                        Mua
+                                    </a>
+                                </div>
+                                <p></p>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- End Product Selection -->
+    </div> <!-- row -->
+    <hr/>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <!-- Categories -->
+            @Html.Partial("~/Views/Shared/Category.cshtml")
+            <!-- End Categories -->
+            <!-- Best product -->
+            @Html.Partial("~/Views/Shared/BestSell.cshtml")
+            <!-- End Best product -->
+        </div>
+        
+        
+        <div class="clearfix visible-sm"></div>
+        
+        <!-- Products -->
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            <div class="col-lg-12 col-sm-12">
+                <span class="title">Sách Nỗi bật</span>
+            </div>
+            <!-- Products Box -->
+            @foreach (var item in Model)
+            {
+               <!-- Product -->
+                @Html.Partial("~/Views/Shared/ListProduct.cshtml", item)
+                 <!-- End Product -->
+            }
+        </div>
+        <!-- Products Slider -->
+        <div class="col-md-9">
+            <div class="col-lg-12 col-sm-12">
+                <span class="title">Khuyến mãi</span>
+            </div>
+            
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="slider">
+                    <div class="bx-wrapper" style="max-width: 100%; margin: 0 auto;">
+                        <div class="bx-viewport" style="max-width: 100%;overflow: hidden; position: relative; height: 200px;">
+                            <ul class="bxslider2">
+                                <li>
+                                    <a href="detail.html"><img src="http://www.fahasa.com/media/magentothem/banner7/Ba-chua-hon.jpg" height="200"></a>
+                                </li>
+                                <li>
+                                    <a href="detail.html"><img src="http://www.fahasa.com/media/magentothem/banner7/Ba-chua-hon.jpg" height="200"></a>
+                                </li>
+                                <li>
+                                    <a href="detail.html"><img src="http://www.fahasa.com/media/magentothem/banner7/Ba-chua-hon.jpg" height="200"></a>
+                                </li>
+                            </ul>
+                        </div> <!-- bx-viewport -->
+                        <div class="bx-controls bx-has-controls-direction">
+                            <!-- <div class="bx-controls-direction">
+                                <a class="bx-prev">prev</a>
+                                <a class="bx-next">next</a>
+                            </div> -->
+                        </div>
+                    </div> <!-- bx-wrapper -->
+                </div>
+            </div>
+        </div>
+        <!-- End Products Slider --> 
+    </div> <!-- Row -->
